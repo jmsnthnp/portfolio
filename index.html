@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>James Nathan Pecundo — AI Video Creator</title>
+<meta name="description" content="I build AI video pipelines that turn ideas into finished brand reels, ads and animated shorts.">
+<meta property="og:title" content="James Nathan Pecundo — AI Video Creator">
+<meta property="og:description" content="I build AI video pipelines that turn ideas into finished brand reels, ads and animated shorts.">
+<!-- Link previews (LinkedIn, WhatsApp, etc.) use your published address. -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jmsnthnp.github.io/portfolio/">
+<meta property="og:site_name" content="James Nathan Pecundo">
+<meta property="og:image" content="https://jmsnthnp.github.io/portfolio/media/reel/preview.jpg">
+<meta property="og:image:secure_url" content="https://jmsnthnp.github.io/portfolio/media/reel/preview.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="James Nathan Pecundo, AI Video Creator: portfolio front page with a strip of video clips">
+<meta name="twitter:image" content="https://jmsnthnp.github.io/portfolio/media/reel/preview.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2309090a'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='34' text-anchor='middle' fill='%23e0a75e'%3EJ%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#09090a; --bg2:#0f0f11; --surface:#141416; --line:rgba(255,255,255,.09);
+  --text:#ede9e2; --muted:#9a948b; --faint:#87817a;
+  --accent:#e0a75e; --accent-soft:rgba(224,167,94,.14); --bg-alt:#131316;
+  --serif:"Instrument Serif",Georgia,serif; --sans:"Inter",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace;
+  --pad:clamp(16px,5vw,72px); --max:1440px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,video{display:block;max-width:100%}
+a{color:inherit}
+::selection{background:var(--accent);color:#000}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* film grain + vignette */
+body::before{content:"";position:fixed;inset:-50%;z-index:100;pointer-events:none;opacity:.07;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain 1s steps(4) infinite}
+@keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-1%)}}
+@media (prefers-reduced-motion:reduce){body::before{animation:none}html{scroll-behavior:auto}}
+
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+.label{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.label b{color:var(--accent);font-weight:500}
+
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;border-bottom:1px solid var(--line);background:rgba(9,9,10,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.mono{font-family:var(--serif);font-size:28px;text-decoration:none;letter-spacing:.02em}
+.mono i{color:var(--accent)}
+nav ul{display:flex;list-style:none;border-left:1px solid rgba(255,255,255,.16)}
+nav ul li{border-right:1px solid rgba(255,255,255,.16)}
+nav ul a{display:block;padding:2px 22px;font-size:14px;color:var(--muted);text-decoration:none;transition:color .2s}
+nav ul a:hover{color:var(--text)}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:12px 22px;border-radius:999px;font-size:14px;font-weight:500;text-decoration:none;border:1px solid var(--line);transition:all .25s;cursor:pointer;background:none;color:var(--text);font-family:inherit}
+.btn:hover{border-color:var(--text)}
+.btn.primary{background:var(--accent);color:#120d06;border-color:var(--accent)}
+.btn.primary:hover{background:#f0bb76;border-color:#f0bb76}
+.btn.accent{border-color:var(--accent);color:var(--text)}
+.btn.accent:hover{background:var(--accent-soft);border-color:#f0bb76;color:#fff}
+nav .btn{padding:9px 18px}
+/* phone menu: a ☰ button that drops the links down under the bar */
+.menu-btn{display:none;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:none;color:var(--text);cursor:pointer;align-items:center;justify-content:center;margin-left:auto;margin-right:10px}
+.menu-btn svg{width:18px;height:18px}
+@media (max-width:820px){
+  .menu-btn{display:inline-flex}
+  nav ul{display:none;position:absolute;top:68px;left:0;right:0;flex-direction:column;border:0;border-bottom:1px solid var(--line);
+    background:rgba(9,9,10,.97);padding:8px var(--pad) 16px}
+  nav.open ul{display:flex}
+  nav ul li{border:0;border-top:1px solid var(--line)}
+  nav ul li:first-child{border-top:0}
+  nav ul a{padding:14px 0;font-size:16px;color:var(--text)}
+}
+
+/* hero */
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:110px 0 32px;position:relative;
+  background:radial-gradient(ellipse 60% 45% at 50% 25%,rgba(224,167,94,.09),transparent 70%),var(--bg-alt)}
+.hero .wrap{display:flex;flex-direction:column;align-items:center;text-align:center;width:100%}
+.hero .strip-wrap{margin-top:28px}
+@media (min-width:561px){.hero .strip .clip{width:auto;height:var(--clipH,284px)}}
+@media (min-width:561px) and (max-height:820px){.hero{padding-top:90px}.hero h1{margin:14px 0 12px}}
+/* showreel montage playing full-size behind a section (used in Contact) */
+.reel-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
+.reel-bg video,.reel-bg img{width:100%;height:100%;object-fit:cover;filter:saturate(.85) contrast(1.05) blur(3px);transform:scale(1.04)}
+.reel-bg::after{content:"";position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 50% at 50% 45%,rgba(9,9,10,.8),rgba(9,9,10,.5) 80%),
+             linear-gradient(180deg,var(--bg-alt) 0%,transparent 22%,transparent 78%,var(--bg-alt) 100%)}
+@media (prefers-reduced-motion:reduce){.reel-bg video{display:none}.reel-bg{background:url(media/reel/showreel.jpg) center/cover}}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(48px,8vw,120px);line-height:.95;letter-spacing:-.02em;margin:20px 0 16px}
+.hero h1 em{color:var(--accent)}
+.hero .role{font-family:var(--serif);font-style:italic;font-size:clamp(22px,2.4vw,28px);color:var(--text);margin-bottom:14px}
+.hero p.bio{color:var(--muted);max-width:620px;font-size:17px;margin:0 auto}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:30px}
+.where{display:inline-flex;align-items:center;flex-wrap:wrap;justify-content:center;gap:4px 8px;margin-top:22px;font-size:13px;color:var(--muted)}
+@media (max-width:560px){.where{flex-direction:column}.where .sep{display:none}}
+.where .dot{width:7px;height:7px;border-radius:50%;background:#5fc27e;box-shadow:0 0 0 3px rgba(95,194,126,.18)}
+@media (max-width:560px){
+  .hero{padding:88px 0 36px;min-height:auto}
+  .hero h1{margin:14px 0 10px}
+  .hero p.bio{font-size:15px}
+  .hero .cta{margin-top:22px}
+  .hero .cta .btn{padding:10px 18px}
+  .hero .strip-wrap{margin-top:30px}
+}
+
+/* stats */
+
+/* sections */
+/* each section is a full-width band with a clear line at its start and end;
+   every other section is slightly lighter so the boundaries read at a glance */
+section.block{padding:clamp(48px,5vw,72px) 0 clamp(56px,7vw,96px);border-top:1px solid rgba(255,255,255,.2)}
+section.block.alt{background:var(--bg-alt)}
+#toolkit{border-bottom:1px solid rgba(255,255,255,.2)}
+.project:last-child{padding-bottom:0}
+.sec-head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px;margin-bottom:50px;padding-bottom:clamp(48px,5vw,72px);position:relative}
+/* full-width line under each section title, marking a new section */
+.sec-head::after{content:"";position:absolute;bottom:0;left:50%;width:100vw;margin-left:-50vw;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.22) 12%,rgba(255,255,255,.22) 88%,transparent)}
+.sec-head + div > .project:first-child{border-top:0;padding-top:0}
+.sec-head h2{font-family:var(--serif);font-weight:400;font-size:clamp(40px,6vw,80px);line-height:1;letter-spacing:-.015em;margin-top:14px}
+.sec-head h2 em{color:var(--accent)}
+.sec-head p{color:var(--muted);max-width:600px;margin:0 auto;text-wrap:balance}
+
+/* project */
+.project{border-top:1px solid var(--line);padding:44px 0 64px}
+.p-top{display:grid;grid-template-columns:minmax(240px,1fr) minmax(0,760px);gap:clamp(32px,4vw,64px);margin-bottom:38px}
+.p-num{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.1em}
+.p-name{font-family:var(--serif);font-size:clamp(34px,4.2vw,56px);line-height:1.02;margin:10px 0 12px}
+.p-kind{font-size:14px;color:var(--muted)}
+.p-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.p-links a{font-size:13px;text-decoration:none;padding:6px 14px;border:1px solid var(--line);border-radius:999px;color:var(--muted);transition:all .2s}
+.p-links a:hover{color:var(--text);border-color:var(--text)}
+.p-body dl{display:grid;gap:22px}
+.p-body dt{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:6px}
+.p-body dd{color:#cfcac2;font-size:17px;line-height:1.65}
+.p-body dd p + p{margin-top:12px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:var(--mono);font-size:12px;padding:4px 10px;border-radius:6px;background:var(--surface);border:1px solid var(--line);color:var(--text)}
+@media (max-width:860px){.p-top{grid-template-columns:1fr;gap:26px}}
+
+/* one scrollable row of videos per project */
+.sub{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:30px 0 14px;display:flex;align-items:center;gap:12px}
+.sub .ln{flex:1;height:1px;background:var(--line)}
+.sub .count{color:var(--faint)}
+.row-wrap{position:relative}
+.edge{position:absolute;top:0;bottom:4px;z-index:3;width:88px;border:0;cursor:pointer;color:#fff;font-size:40px;line-height:1;
+  display:flex;align-items:center;transition:opacity .3s,color .2s;font-family:var(--sans);font-weight:300;text-shadow:0 2px 10px rgba(0,0,0,.6)}
+.edge.prev{left:0;justify-content:flex-start;padding-left:14px;border-radius:12px 0 0 12px;background:linear-gradient(90deg,rgba(0,0,0,.85),rgba(0,0,0,.45) 55%,transparent)}
+.edge.next{right:0;justify-content:flex-end;padding-right:14px;border-radius:0 12px 12px 0;background:linear-gradient(270deg,rgba(0,0,0,.85),rgba(0,0,0,.45) 55%,transparent)}
+.edge:hover{color:var(--accent)}
+.edge.off{opacity:0;pointer-events:none}
+@media (max-width:560px){.edge{width:52px;font-size:30px}}
+.row{--h:400px;display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;padding-bottom:4px}
+.row::-webkit-scrollbar{display:none}
+.row .card{height:var(--h);flex:none;scroll-snap-align:start}
+@media (max-width:560px){.row{--h:300px;gap:10px}.card .meta strong{font-size:13px}}
+.card{position:relative;border-radius:12px;overflow:hidden;background:var(--surface);border:1px solid var(--line);cursor:pointer;aspect-ratio:9/16;isolation:isolate;outline:none}
+.card.r34{aspect-ratio:3/4}
+.card img,.card video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.8,.2,1),opacity .3s}
+.card video{opacity:0}
+.card.playing video{opacity:1}
+.card:hover img,.card:hover video,.card:focus-visible img{transform:scale(1.04)}
+.card:focus-visible{border-color:var(--accent)}
+.card::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85),transparent 45%);z-index:1;pointer-events:none}
+.card .meta{position:absolute;left:14px;right:14px;bottom:12px;z-index:2}
+.card .meta strong{display:block;font-weight:500;font-size:14px;line-height:1.3}
+.card .meta span{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.card .play{position:absolute;top:12px;right:12px;z-index:2;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,.45);backdrop-filter:blur(6px);display:grid;place-items:center;border:1px solid rgba(255,255,255,.18);transition:background .2s}
+.card:hover .play{background:var(--accent);border-color:var(--accent)}
+.card:hover .play svg{fill:#120d06}
+.play svg{width:12px;height:12px;fill:#fff;margin-left:2px}
+
+
+/* toolkit */
+.tools{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tgroup{border:1px solid var(--line);border-radius:12px;padding:26px;background:linear-gradient(180deg,var(--bg2),var(--bg))}
+.tgroup h3{font-family:var(--serif);font-weight:400;font-size:28px;margin-bottom:6px}
+.tgroup p{font-size:14px;color:var(--muted);margin-bottom:18px}
+@media (max-width:900px){.tools{grid-template-columns:1fr}}
+
+/* contact */
+.contact{padding:clamp(100px,14vw,180px) 0 clamp(100px,14vw,180px);text-align:center;position:relative;overflow:hidden;background:var(--bg-alt)}
+.contact .wrap{position:relative;z-index:1}
+.contact h2,.contact .mail{text-shadow:0 2px 24px rgba(0,0,0,.7)}
+.contact h2{font-family:var(--serif);font-weight:400;font-size:clamp(48px,8vw,120px);line-height:.95;letter-spacing:-.02em;margin:18px 0 30px}
+.contact h2 em{color:var(--accent)}
+.mail{font-family:var(--serif);font-size:clamp(24px,3.4vw,40px);text-decoration:none;border-bottom:1px solid var(--faint);transition:border-color .2s;word-break:break-all}
+.mail:hover{border-color:var(--accent)}
+.contact .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+/* moving filmstrip of clips (top of the page) */
+.strip{overflow:hidden;width:100%;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.track{display:flex;gap:14px;width:max-content;will-change:transform}
+/* shaded arrows on the filmstrip: hover (or hold on touch) to speed it up in that direction */
+.strip-wrap{position:relative}
+.strip-wrap .edge{bottom:0;width:clamp(64px,7vw,120px);border-radius:0}
+.strip-wrap .edge.on{color:var(--accent)}
+.strip .clip{width:clamp(110px,11vw,160px);aspect-ratio:9/16;flex:none;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#000;cursor:pointer;transition:transform .35s,border-color .35s}
+.strip .clip:hover{transform:translateY(-6px);border-color:var(--accent)}
+.strip .clip video{width:100%;height:100%;object-fit:cover;pointer-events:none}
+footer{border-top:1px solid var(--line);padding:26px 0;font-size:13px;color:var(--faint)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:200;background:rgba(5,5,6,.94);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;padding:60px 70px}
+.lb.open{display:flex}
+.lb-stage{max-width:100%;max-height:100%;display:flex;flex-direction:column;align-items:center;gap:14px}
+.lb video,.lb img{max-height:calc(100svh - 150px);max-width:min(92vw,1600px);border-radius:10px;background:#000}
+.lb .cap{text-align:center}
+.lb iframe.yt{height:calc(100svh - 150px);aspect-ratio:9/16;max-width:92vw;border:0;border-radius:10px;background:#000}
+.lb .cap a{color:var(--accent);text-decoration:none}
+.lb .cap a:hover{text-decoration:underline}
+.lb .cap strong{font-weight:500}
+.lb .cap span{display:block;font-size:13px;color:var(--muted)}
+.lb button{position:absolute;background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--text);width:46px;height:46px;border-radius:50%;cursor:pointer;font-size:20px;display:grid;place-items:center;transition:background .2s}
+.lb button:hover{background:rgba(255,255,255,.14)}
+.lb .x{top:18px;right:18px}
+.lb .prev{left:16px;top:50%;transform:translateY(-50%)}
+.lb .next{right:16px;top:50%;transform:translateY(-50%)}
+@media (max-width:640px){.lb{padding:64px 12px 20px}.lb .prev,.lb .next{top:auto;bottom:14px;transform:none}}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="wrap">
+    <a href="#top" class="mono">J<i>N</i>P</a>
+    <ul>
+      <li><a href="#work">Client work</a></li>
+      <li><a href="#personal-projects">Personal projects</a></li>
+      <li><a href="#toolkit">Toolkit</a></li>
+    </ul>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <a href="#contact" class="btn accent">Contact</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <div class="label"><b>●</b>&nbsp; Portfolio · 2026</div>
+      <h1>James Nathan <em>Pecundo</em></h1>
+      <div class="role">AI Video Creator</div>
+      <p class="bio">I've spent more than two years making videos with AI, and I enjoy learning new tools and processes as they come out. My video workflows mainly run through Claude Code, connecting all my tools so I can move from idea to final cut fast. Alongside client work, I also take on personal projects in my spare time, most recently an animated YouTube Shorts series.</p>
+      <div class="cta">
+        <a href="#work" class="btn accent">View the work
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
+        <a href="mailto:jnpecundo@gmail.com" class="btn">jnpecundo@gmail.com</a>
+      </div>
+      <div class="where"><span class="dot"></span><span>Based in Metro Manila, Philippines</span><span class="sep">·</span><span>Open to remote roles</span></div>
+    </div>
+  </div>
+  <div class="strip-wrap">
+    <button class="edge prev" id="stripPrev" aria-label="Scroll clips to the right">‹</button>
+    <div class="strip" aria-label="Selected clips"><div class="track" id="track"></div></div>
+    <button class="edge next" id="stripNext" aria-label="Scroll clips to the left">›</button>
+  </div>
+</header>
+
+
+<main>
+  <section class="block" id="work">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div><div class="label">01 — Client work</div><h2>Brand <em>films</em> &amp; ads</h2></div>
+        <p>Social posts, promos and UGC-style ads made for brands. Click any video to play it with sound.</p>
+      </div>
+      <div id="clients"></div>
+    </div>
+  </section>
+
+  <section class="block alt" id="personal-projects">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div><div class="label">02 — Personal projects</div><h2>Personal <em>projects</em></h2></div>
+        <p>Things I make on my own time to try new tools and build my own workflows.</p>
+      </div>
+      <div id="personal"></div>
+    </div>
+  </section>
+
+  <section class="block" id="toolkit">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div><div class="label">03 — Toolkit</div><h2>Tools I <em>use</em></h2></div>
+        <p>These are the tools I use today. I pick up new ones quickly, so expect this list to keep growing.</p>
+      </div>
+      <div class="tools">
+        <div class="tgroup reveal"><h3>Generate</h3><p>Image, video and model tools</p>
+          <div class="chips"><span class="chip">Higgsfield</span><span class="chip">Seedance</span><span class="chip">Kling</span><span class="chip">MiniMax H3</span><span class="chip">Wan 2.2</span><span class="chip">Qwen Image Edit</span><span class="chip">Gemini</span><span class="chip">Nano Banana</span><span class="chip">GPT Image</span><span class="chip">Suno</span><span class="chip">Google Flow</span><span class="chip">Runway</span><span class="chip">ElevenLabs</span></div></div>
+        <div class="tgroup reveal"><h3>Build</h3><p>Pipelines, automation and local models</p>
+          <div class="chips"><span class="chip">Claude Code</span><span class="chip">ChatGPT</span><span class="chip">Grok</span><span class="chip">ComfyUI</span><span class="chip">Remotion</span><span class="chip">three.js</span><span class="chip">Python</span></div></div>
+        <div class="tgroup reveal"><h3>Finish</h3><p>Edit, grade, encode</p>
+          <div class="chips"><span class="chip">CapCut</span><span class="chip">FFmpeg</span><span class="chip">+ whatever the job needs</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="reel-bg" aria-hidden="true">
+      <video src="media/reel/showreel.mp4" poster="media/reel/showreel.jpg" muted loop playsinline preload="none"></video>
+    </div>
+    <div class="wrap reveal">
+      <div class="label">04 — Contact</div>
+      <h2>Let's make<br>something <em>together.</em></h2>
+      <a class="mail" href="mailto:jnpecundo@gmail.com">jnpecundo@gmail.com</a>
+      <div class="cta">
+        <a href="mailto:jnpecundo@gmail.com" class="btn primary">Send an email</a>
+        <button class="btn" id="copy">Copy address</button>
+      </div>
+      <div class="where"><span class="dot"></span><span>Based in Metro Manila, Philippines</span><span class="sep">·</span><span>Open to remote roles</span></div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap"><span>© 2026 James Nathan Pecundo</span><span>AI Video Creator</span></div></footer>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Media viewer">
+  <button class="x" aria-label="Close">✕</button>
+  <button class="prev" aria-label="Previous">‹</button>
+  <div class="lb-stage" id="lbStage"></div>
+  <button class="next" aria-label="Next">›</button>
+</div>
+
+<script>
+/* ============================================================
+   EDIT YOUR CONTENT HERE
+   - links: add your social links, e.g. {label:"Instagram", url:"https://instagram.com/..."}
+   - tools: the tools used on that project
+   - videos: each project shows ONE scrollable row. Add a line per video:
+       { id: "file-name", title: "Shown title", type: "small label (optional)", r: "9:16" or "3:4" }
+   ============================================================ */
+const CLIENTS = [
+  {
+    name: "E.P Exclusives",
+    kind: "Luxury menswear · Instagram content",
+    links: [{ label: "Instagram", url: "https://www.instagram.com/e.p.exclusives/" }],
+    brief: "Cinematic Instagram Reels for a luxury tailoring label, made from the brand's own lookbooks. Slow macro shots move across lapels, trims and cuffs, then settle on the real catalogue photo, so every reel stays true to the actual garment.",
+    workflow: [
+      "A local reel pipeline I built with Claude Code: suit photos extracted from the client's lookbook PDFs → clean-ups and restaging with Qwen Image Edit → local video generation model in ComfyUI, with each reveal landing on the real catalogue photo → several seeds drafted, the best one rendered at full quality → branded end card in Remotion, sound design and FFmpeg delivery to Instagram spec.",
+      "A reusable template turns any new suit into a reel. Everything runs locally on my own GPU, so there are no subscriptions or per-video credits, which keeps the client's production costs down as the catalogue grows."
+    ],
+    tools: ["Claude Code", "ComfyUI", "MiniMax H3", "Wan 2.2", "Qwen Image Edit", "Remotion", "Python", "FFmpeg"],
+    groups: [{ title: "Instagram posts", items: [
+      { id: "ep-01", title: "Midnight Tuxedo", type: "Instagram post", r: "9:16" },
+      { id: "ep-02", title: "Crystal Trim", type: "Instagram post", r: "9:16" },
+      { id: "ep-03", title: "Emerald Jacquard", type: "Instagram post", r: "9:16" },
+      { id: "ep-04", title: "Red Carpet Arrival", type: "Instagram post", r: "9:16" }
+    ]}]
+  },
+  {
+    name: "Mixxi",
+    kind: "AI video app · Promos & UGC ads",
+    links: [{ label: "Instagram", url: "https://www.instagram.com/mixxi.studios/" }],
+    brief: "Launch content for an app that puts users into AI-generated worlds: a product demo, two festive Ganesh Chaturthi stories in Hindi and English, and UGC-style ads with one AI creator. The same faces and places carry through every shot.",
+    workflow: [
+      "Storyboards and draft characters from the creative team → refined in Nano Banana and GPT Image into character reference sheets and location references → shot-by-shot prompts written and generated in Seedance → original music made in Suno to fit each video's topic → video and music cut together in CapCut → handed to the post team for language checks, final polish and captions.",
+      "Locking the references first keeps characters consistent and avoids wasted generations."
+    ],
+    tools: ["Higgsfield", "Nano Banana", "GPT Image", "Seedance", "Suno", "CapCut"],
+    groups: [{ title: "Promos & UGC ads", items: [
+      { id: "mixxi-promo-01", title: "Create Your Mixxi", type: "Promo", r: "9:16" },
+      { id: "mixxi-promo-02", title: "Ganpati Bappa (Hindi)", type: "Promo", r: "9:16" },
+      { id: "mixxi-promo-03", title: "The Family Comes Home", type: "Promo", r: "9:16" },
+      { id: "mixxi-ugc-01", title: "Café Unboxing", type: "UGC ad", r: "9:16" },
+      { id: "mixxi-ugc-02", title: "Street Selfie", type: "UGC ad", r: "9:16" },
+      { id: "mixxi-ugc-03", title: "Show & Tell", type: "UGC ad", r: "9:16" }
+    ]}]
+  }
+];
+
+/* yt: "VIDEO_ID" on a video plays it through YouTube (counts as a view) instead of the copy on this site.
+   PERSONAL PROJECTS: to add a new one, copy a whole { ... } block below,
+   paste it after the last one (with a comma between), and change the details. */
+const PERSONAL = [
+{
+  name: "Stickled Stories",
+  kind: "Original YouTube Shorts series · writer, director, animator, voice",
+  links: [{ label: "YouTube · @StickledStories", url: "https://www.youtube.com/@StickledStories" }],
+  brief: "\"Random stories, told by little sticks.\" A one-person animated series I write, voice, animate and finish myself. Flat stick characters act inside 3D sets, and each narrated 60-second short shows why someone who looked foolish turned out to be right.",
+  workflow: [
+    "A production pipeline I built and run with Claude Code: script → narration in my own voice through local TTS → word-level timing → storyboards and floor plans → three.js sets rendered with Remotion → music from ComfyUI → automated QC audits → FFmpeg finishing.",
+    "Shared sets and styles make each new episode faster than the last, and everything runs locally with no per-video credits."
+  ],
+  tools: ["Claude Code", "Remotion", "three.js", "ComfyUI", "Local TTS", "Python", "FFmpeg"],
+  groups: [{ title: "Episodes", items: [
+    { id: "stickled-e01", title: "How One Iron Spike Saved So Many Lives", type: "Episode 1", r: "9:16", yt: "_SAkfc8eIAU" },
+    { id: "stickled-e02", title: "Why Hatters Really Went Mad", type: "Episode 2", r: "9:16", yt: "HHzoi2Gh7GQ" },
+    { id: "stickled-e03", title: "Why Companies Want You To Quit", type: "Episode 3", r: "9:16", yt: "mPe0VCHTQ6o" },
+    { id: "stickled-e04", title: "The Bullet Holes That Weren't There", type: "Episode 4", r: "9:16", yt: "XmsQYIKJvLs" },
+    { id: "stickled-e05", title: "The Fake Town That Became Real", type: "Episode 5", r: "9:16", yt: "z2J4z1rhsoQ" },
+    { id: "stickled-e06", title: "What If Heroes Got the Bill", type: "Episode 6", r: "9:16", yt: "W2964AVjTyw" },
+  ]}]
+}
+/* , { name: "Next project", kind: "...", links: [], brief: "...", workflow: "...", tools: [],
+       groups: [{ title: "Videos", items: [ { id: "my-video", title: "My Video", r: "9:16" } ]}] } */
+];
+/* ============================ end of content ============================ */
+
+const $ = (s, el = document) => el.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const playIcon = '<svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg>';
+const media = []; // flat list for the lightbox
+
+function card(it, brand) {
+  const i = media.push({ type: "video", id: it.id, title: it.title, sub: brand, yt: it.yt }) - 1;
+  return `<div class="card${it.r === "3:4" ? " r34" : ""}" tabindex="0" role="button" data-i="${i}" data-id="${it.id}" aria-label="Play ${esc(it.title)}">
+    <img src="media/img/${it.id}.jpg" alt="" loading="lazy">
+    <div class="play">${playIcon}</div>
+    <div class="meta"><strong>${esc(it.title)}</strong><span>${esc(it.type || brand)}</span></div></div>`;
+}
+
+/* brief / workflow can be one string or a list of strings (one per paragraph) */
+const paras = v => (Array.isArray(v) ? v : [v]).map(t => `<p>${esc(t)}</p>`).join("");
+
+function project(p, n) {
+  const links = p.links.length ? `<div class="p-links">${p.links.map(l => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`).join("")}</div>` : "";
+  const rows = [
+    ["Brief", paras(p.brief)],
+    ["Workflow", paras(p.workflow)],
+    p.tools.length ? ["Tools", `<div class="chips">${p.tools.map(t => `<span class="chip">${esc(t)}</span>`).join("")}</div>`] : null,
+  ].filter(Boolean);
+  const groups = p.groups.map(g => `<div class="sub"><span>${esc(g.title || "Videos")}</span><span class="count">${g.items.length}</span><span class="ln"></span></div>
+    <div class="row-wrap">
+      <button class="edge prev" data-dir="-1" aria-label="Scroll left">‹</button>
+      <div class="row">${g.items.map(it => card(it, p.name)).join("")}</div>
+      <button class="edge next" data-dir="1" aria-label="Scroll right">›</button>
+    </div>`).join("");
+  return `<article class="project reveal">
+    <div class="p-top">
+      <div><div class="p-num">${String(n).padStart(2, "0")}</div><h3 class="p-name">${esc(p.name)}</h3><div class="p-kind">${esc(p.kind)}</div>${links}</div>
+      <div class="p-body"><dl>${rows.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join("")}</dl></div>
+    </div>${groups}</article>`;
+}
+
+$("#clients").innerHTML = CLIENTS.map((p, k) => project(p, k + 1)).join("");
+$("#personal").innerHTML = PERSONAL.map((p, k) => project(p, k + 1)).join("");
+
+/* row side arrows + seamless infinite scroll.
+   The videos are copied once before and once after the real set. Whenever you drift into a copy,
+   the row silently shifts by one set width to the matching real card, so it never visibly jumps. */
+document.querySelectorAll(".row-wrap").forEach(wrap => {
+  const row = wrap.querySelector(".row");
+  const prev = wrap.querySelector(".edge.prev"), next = wrap.querySelector(".edge.next");
+  if (row.scrollWidth - row.clientWidth <= 4) {            // all videos fit: no arrows, no looping
+    prev.classList.add("off"); next.classList.add("off"); return;
+  }
+  const originals = [...row.children];
+  const copies = () => originals.map(c => {
+    const k = c.cloneNode(true);
+    k.setAttribute("aria-hidden", "true"); k.tabIndex = -1;
+    return k;
+  });
+  row.prepend(...copies());
+  row.append(...copies());
+  const setWidth = () => originals[0].offsetLeft - row.children[0].offsetLeft;
+  const jump = x => { row.style.scrollBehavior = "auto"; row.style.scrollSnapType = "none";
+    row.scrollLeft = x; row.offsetHeight; row.style.scrollBehavior = ""; row.style.scrollSnapType = ""; };
+  jump(setWidth());                                         // start on the real first video
+  const recentre = () => {
+    const w = setWidth();
+    if (row.scrollLeft < w * 0.5) jump(row.scrollLeft + w);
+    else if (row.scrollLeft >= w * 1.5) jump(row.scrollLeft - w);
+  };
+  let t;
+  row.addEventListener("scroll", () => { clearTimeout(t); t = setTimeout(recentre, 160); }, { passive: true });
+  addEventListener("resize", () => { clearTimeout(t); t = setTimeout(recentre, 160); });
+  [prev, next].forEach(b => b.addEventListener("click", () =>
+    row.scrollBy({ left: +b.dataset.dir * row.clientWidth * 0.8 })));
+});
+
+
+/* FILMSTRIP at the top of the page: the clips shown, in order (use video ids from above).
+   Each needs a small 5-second preview in media/strip/ (see HOW-TO-PUBLISH.md). Click a clip to watch it. */
+const STRIP = ["ep-04", "mixxi-promo-01", "stickled-e05", "mixxi-ugc-01", "ep-02", "stickled-e06",
+               "mixxi-promo-03", "ep-03", "stickled-e02", "mixxi-ugc-02"];
+const stripHTML = copy => STRIP.map(id => {
+  const c = document.querySelector(`.card[data-id="${id}"]`);
+  const i = c ? c.dataset.i : "";
+  const t = c ? c.querySelector("strong").textContent : id;
+  return `<div class="clip" data-i="${i}" ${copy ? 'aria-hidden="true" tabindex="-1"' : `tabindex="0" role="button" aria-label="Play ${esc(t)}"`}>
+    <video src="media/strip/${id}.mp4" poster="media/img/${id}.jpg" muted loop playsinline autoplay preload="auto"></video></div>`;
+}).join("");
+/* repeat the clip list as many times as this screen needs, so the loop never runs out of clips
+   (one copy is the "loop distance"; there must always be at least a screen's width of clips after it) */
+const buildStrip = () => {
+  const track = $("#track");
+  if (!track.children.length) track.innerHTML = stripHTML(false);
+  const n = STRIP.length, first = track.children[0];
+  const unit = track.children.length > n ? track.children[n].offsetLeft - first.offsetLeft
+                                         : track.scrollWidth + parseFloat(getComputedStyle(track).columnGap || 14);
+  const need = Math.ceil(1 + innerWidth / unit) + 1;           // copies needed for this screen width
+  let have = track.children.length / n;
+  while (have < need) { track.insertAdjacentHTML("beforeend", stripHTML(true)); have++; }
+};
+/* size the top filmstrip so the whole first screen (text + clips + a gap below) fits the window.
+   Clips shrink on shorter screens (min 140px tall) and stop growing at 320px on tall ones. */
+const fitHero = () => {
+  const hero = $(".hero"); if (innerWidth <= 560) { hero.style.removeProperty("--clipH"); return; }
+  const cs = getComputedStyle(hero), wrap = $(".hero .wrap"), strip = $(".hero .strip-wrap");
+  const used = parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom) + wrap.offsetHeight + parseFloat(getComputedStyle(strip).marginTop);
+  const h = Math.max(140, Math.min(320, innerHeight - used - 4));
+  hero.style.setProperty("--clipH", h + "px");
+};
+const layoutStrip = () => { fitHero(); buildStrip(); };
+layoutStrip(); addEventListener("resize", layoutStrip); document.fonts && document.fonts.ready.then(layoutStrip);
+
+/* filmstrip movement: drifts slowly on its own; pauses while you hover the clips;
+   hovering (or holding, on touch) an arrow speeds it up that way, and it keeps drifting that way afterwards. */
+(() => {
+  const track = $("#track"), strip = $(".hero .strip");
+  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let x = 0, dir = -1, push = 0, overClips = false, last = performance.now();
+  const half = () => { const c = track.children; return c[STRIP.length].offsetLeft - c[0].offsetLeft; };  // one copy's width
+  const hold = (btn, d) => {
+    const on = () => { push = d; dir = d; btn.classList.add("on"); };
+    const off = () => { push = 0; btn.classList.remove("on"); };
+    btn.addEventListener("pointerenter", e => { if (e.pointerType === "mouse") on(); });
+    btn.addEventListener("pointerleave", off);
+    btn.addEventListener("pointerdown", on);
+    btn.addEventListener("pointerup", e => { if (e.pointerType !== "mouse") off(); });
+    btn.addEventListener("pointercancel", off);
+  };
+  hold($("#stripPrev"), 1);    // left arrow: clips move to the right
+  hold($("#stripNext"), -1);   // right arrow: clips move to the left
+  strip.addEventListener("pointerenter", e => { if (e.pointerType === "mouse") overClips = true; });
+  strip.addEventListener("pointerleave", () => overClips = false);
+  const tick = now => {
+    const dt = Math.min(0.05, (now - last) / 1000); last = now;
+    const W = half(), slow = W / 60;                 // one full loop per minute
+    const v = push ? push * slow * 9 : (overClips || still ? 0 : dir * slow);
+    x += v * dt;
+    if (x <= -W) x += W; if (x > 0) x -= W;          // wrap seamlessly (the list repeats)
+    track.style.transform = `translateX(${x}px)`;
+    requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+})();
+
+/* play the strip and the contact montage only while they are on screen (keeps the page fast) */
+/* each strip clip plays only while it is on screen (the list repeats, so most copies are off-screen) */
+const clipWatch = new IntersectionObserver(es => es.forEach(e => {
+  const v = e.target.querySelector("video");
+  e.isIntersecting ? v.play().catch(() => {}) : v.pause();
+}), { rootMargin: "0px 200px" });
+const watchClips = () => document.querySelectorAll("#track .clip:not([data-w])").forEach(c => { c.dataset.w = 1; clipWatch.observe(c); });
+watchClips(); addEventListener("resize", watchClips);
+const reel = $(".reel-bg video");
+new IntersectionObserver(([e]) => e.isIntersecting ? reel.play().catch(() => {}) : reel.pause(), { rootMargin: "200px" }).observe(reel);
+
+/* hover previews on devices with a mouse */
+if (matchMedia("(hover:hover)").matches) {
+  document.querySelectorAll(".card").forEach(c => {
+    let v;
+    c.addEventListener("mouseenter", () => {
+      if (!v) { v = document.createElement("video"); v.muted = true; v.loop = true; v.playsInline = true; v.preload = "none"; v.src = `media/video/${c.dataset.id}.mp4`; c.insertBefore(v, c.children[1]); }
+      v.play().then(() => c.classList.add("playing")).catch(() => {});
+    });
+    c.addEventListener("mouseleave", () => { if (v) { v.pause(); c.classList.remove("playing"); } });
+  });
+}
+
+/* lightbox */
+const lb = $("#lb"), stage = $("#lbStage");
+let cur = -1, lastFocus;
+function show(i) {
+  cur = (i + media.length) % media.length;
+  const m = media[cur];
+  stage.innerHTML = (m.yt
+    ? `<iframe class="yt" src="https://www.youtube.com/embed/${m.yt}?autoplay=1&rel=0&playsinline=1" title="${esc(m.title)}"
+         allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`
+    : m.type === "video"
+    ? `<video src="media/video/${m.id}.mp4" poster="media/img/${m.id}.jpg" controls autoplay playsinline></video>`
+    : `<img src="media/img/${m.id}.jpg" alt="${esc(m.title)}">`) +
+    `<div class="cap"><strong>${esc(m.title)}</strong><span>${esc(m.sub)}${m.yt ? ` · <a href="https://www.youtube.com/shorts/${m.yt}" target="_blank" rel="noopener">Watch on YouTube ↗</a>` : ""}</span></div>`;
+}
+function open(i) { lastFocus = document.activeElement; show(i); lb.classList.add("open"); document.body.style.overflow = "hidden"; $(".x", lb).focus(); }
+function close() { lb.classList.remove("open"); stage.innerHTML = ""; document.body.style.overflow = ""; lastFocus && lastFocus.focus(); }
+document.addEventListener("click", e => { const t = e.target.closest("[data-i]"); if (t) open(+t.dataset.i); });
+document.addEventListener("keydown", e => {
+  if (lb.classList.contains("open")) {
+    if (e.key === "Escape") close();
+    if (e.key === "ArrowRight") show(cur + 1);
+    if (e.key === "ArrowLeft") show(cur - 1);
+  } else if ((e.key === "Enter" || e.key === " ") && e.target.dataset && e.target.dataset.i) { e.preventDefault(); open(+e.target.dataset.i); }
+});
+$(".x", lb).onclick = close;
+$(".prev", lb).onclick = () => show(cur - 1);
+$(".next", lb).onclick = () => show(cur + 1);
+lb.addEventListener("click", e => { if (e.target === lb) close(); });
+
+/* nav + reveal + copy */
+const nav = $("#nav");
+/* phone menu open/close; closes again after picking a link */
+const menuBtn = $("#menuBtn");
+const setMenu = open => { nav.classList.toggle("open", open); menuBtn.setAttribute("aria-expanded", open); menuBtn.setAttribute("aria-label", open ? "Close menu" : "Open menu"); };
+menuBtn.onclick = () => setMenu(!nav.classList.contains("open"));
+nav.querySelectorAll("ul a").forEach(a => a.addEventListener("click", () => setMenu(false)));
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
+document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+$("#copy").onclick = async e => {
+  try { await navigator.clipboard.writeText("jnpecundo@gmail.com"); e.target.textContent = "Copied ✓"; }
+  catch { e.target.textContent = "jnpecundo@gmail.com"; }
+  setTimeout(() => e.target.textContent = "Copy address", 2000);
+};
+</script>
+</body>
+</html>
