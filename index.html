@@ -356,7 +356,11 @@ const CLIENTS = [
       { id: "ep-01", title: "Midnight Tuxedo", type: "Instagram post", r: "9:16" },
       { id: "ep-02", title: "Crystal Trim", type: "Instagram post", r: "9:16" },
       { id: "ep-03", title: "Emerald Jacquard", type: "Instagram post", r: "9:16" },
-      { id: "ep-04", title: "Red Carpet Arrival", type: "Instagram post", r: "9:16" }
+      { id: "ep-04", title: "Red Carpet Arrival", type: "Instagram post", r: "9:16" },
+      { id: "ep-05", title: "Burgundy Satin", type: "Instagram reel", r: "9:16" },
+      { id: "ep-06", title: "Rose Jacquard", type: "Instagram reel", r: "9:16" },
+      { id: "ep-07", title: "From Cloth to Suit", type: "Instagram reel", r: "9:16" },
+      { id: "ep-08", title: "Crystal Fringe", type: "Instagram reel", r: "9:16" }
     ]}]
   },
   {
@@ -483,8 +487,8 @@ document.querySelectorAll(".row-wrap").forEach(wrap => {
 
 /* FILMSTRIP at the top of the page: the clips shown, in order (use video ids from above).
    Each needs a small 5-second preview in media/strip/ (see HOW-TO-PUBLISH.md). Click a clip to watch it. */
-const STRIP = ["ep-04", "mixxi-promo-01", "stickled-e05", "mixxi-ugc-01", "ep-02", "stickled-e06",
-               "mixxi-promo-03", "ep-03", "stickled-e02", "mixxi-ugc-02"];
+const STRIP = ["ep-04", "mixxi-promo-01", "stickled-e05", "ep-05", "mixxi-ugc-01", "ep-02", "stickled-e06",
+               "mixxi-promo-03", "ep-08", "stickled-e02", "ep-03", "mixxi-ugc-02"];
 const stripHTML = copy => STRIP.map(id => {
   const c = document.querySelector(`.card[data-id="${id}"]`);
   const i = c ? c.dataset.i : "";
