@@ -506,7 +506,9 @@ document.querySelectorAll(".row-wrap").forEach(wrap => {
    Each needs a small 5-second preview in media/strip/ (see HOW-TO-PUBLISH.md). Click a clip to watch it. */
 const STRIP = ["ep-04", "mixxi-promo-01", "stickled-e05", "ep-13", "mixxi-ugc-01", "stickled-e06",
                "ep-09", "mixxi-promo-03", "stickled-e02", "ep-02", "mixxi-ugc-02", "stickled-e01",
-               "ep-10", "mixxi-promo-02", "stickled-e03", "ep-12", "mixxi-ugc-03", "stickled-e04"];
+               "ep-10", "mixxi-promo-02", "stickled-e03", "ep-12", "mixxi-ugc-03", "stickled-e04",
+               "ep-08", "mixxi-promo-04", "stickled-e07", "ep-03", "mixxi-promo-05", "stickled-e08",
+               "ep-05", "mixxi-promo-06", "stickled-e09"];
 const stripHTML = copy => STRIP.map(id => {
   const c = document.querySelector(`.card[data-id="${id}"]`);
   const i = c ? c.dataset.i : "";
